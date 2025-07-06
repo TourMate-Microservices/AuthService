@@ -39,13 +39,9 @@ public partial class TourMateAuthContext : DbContext
     {
         modelBuilder.Entity<Account>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("Account");
+            entity.ToTable("Account");
 
-            entity.Property(e => e.AccountId)
-                .ValueGeneratedOnAdd()
-                .HasColumnName("accountId");
+            entity.Property(e => e.AccountId).HasColumnName("accountId");
             entity.Property(e => e.CreatedDate)
                 .HasColumnType("datetime")
                 .HasColumnName("createdDate");
@@ -59,6 +55,11 @@ public partial class TourMateAuthContext : DbContext
                 .HasColumnName("password");
             entity.Property(e => e.RoleId).HasColumnName("roleId");
             entity.Property(e => e.Status).HasColumnName("status");
+
+            entity.HasOne(d => d.Role).WithMany(p => p.Accounts)
+                .HasForeignKey(d => d.RoleId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Account_Role");
         });
 
         modelBuilder.Entity<RefreshToken>(entity =>
@@ -79,17 +80,18 @@ public partial class TourMateAuthContext : DbContext
                 .HasMaxLength(255)
                 .HasColumnName("token");
             entity.Property(e => e.UserId).HasColumnName("userId");
+
+            entity.HasOne(d => d.User).WithMany()
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_RefreshToken_Account");
         });
 
         modelBuilder.Entity<Role>(entity =>
         {
-            entity
-                .HasNoKey()
-                .ToTable("Role");
+            entity.ToTable("Role");
 
-            entity.Property(e => e.RoleId)
-                .ValueGeneratedOnAdd()
-                .HasColumnName("roleId");
+            entity.Property(e => e.RoleId).HasColumnName("roleId");
             entity.Property(e => e.RoleName)
                 .HasMaxLength(50)
                 .HasColumnName("roleName");

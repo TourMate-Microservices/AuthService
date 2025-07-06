@@ -7,11 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TourMate.AuthService.Repositories\TourMate.AuthService.Repositories.csproj" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.6" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="7.1.2" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.1.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="IServices\" />
+    <ProjectReference Include="..\TourMate.AuthService.Repositories\TourMate.AuthService.Repositories.csproj" />
   </ItemGroup>
+
+
 
 </Project>

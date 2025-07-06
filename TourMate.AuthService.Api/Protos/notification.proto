@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option csharp_namespace = "NotificationService.Grpc";
+
+service NotificationGrpc {
+  rpc SendEmail (SendEmailRequest) returns (SendEmailReply);
+}
+
+message SendEmailRequest {
+  string to = 1;
+  string subject = 2;
+  string body = 3;
+}
+
+message SendEmailReply {
+  bool success = 1;
+}

@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option csharp_namespace = "UserService.Grpc";
+
+service UserGrpc {
+  rpc GetCustomerByAccountId (GetByAccountIdRequest) returns (CustomerReply);
+  rpc GetTourGuideByAccountId (GetByAccountIdRequest) returns (TourGuideReply);
+}
+
+message GetByAccountIdRequest {
+  int32 accountId = 1;
+}
+
+message CustomerReply {
+  string fullName = 1;
+}
+
+message TourGuideReply {
+  string fullName = 1;
+}

@@ -16,4 +16,6 @@ public partial class RefreshToken
     public bool IsRevoked { get; set; }
 
     public DateTime CreatedAt { get; set; }
+
+    public virtual Account User { get; set; } = null!;
 }

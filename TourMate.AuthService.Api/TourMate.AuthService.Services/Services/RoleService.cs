@@ -20,7 +20,7 @@ namespace TourMate.AuthService.Services.Services
 
         public async Task<IEnumerable<Role>> GetAllRolesAsync()
         {
-            return await _roleRepository.GetAllAsync(pageSize: 100, pageIndex: 0);
+            return await _roleRepository.GetAllList();
         }
 
         public async Task<Role?> GetRoleByIdAsync(int id)

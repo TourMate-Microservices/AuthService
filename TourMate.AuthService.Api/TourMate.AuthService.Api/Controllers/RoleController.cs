@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 using TourMate.AuthService.Services.IServices;
 using TourMate.AuthService.Repositories.Models;
+using TourMate.AuthService.Repositories.RequestModels;
+
 
 namespace TourMate.AuthService.Api.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/v1/roles")]
     public class RoleController : ControllerBase
     {
         private readonly IRoleService _roleService;
@@ -150,13 +152,4 @@ namespace TourMate.AuthService.Api.Controllers
     }
 }
 
-// Request Models
-public class CreateRoleRequest
-{
-    public string RoleName { get; set; } = string.Empty;
-}
 
-public class UpdateRoleRequest
-{
-    public string RoleName { get; set; } = string.Empty;
-}

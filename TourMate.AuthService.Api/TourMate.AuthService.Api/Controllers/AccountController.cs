@@ -1,13 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 using TourMate.AuthService.Services.IServices;
 using TourMate.AuthService.Repositories.Models;
-using TourMate.AuthService.Repositories.ResponseModels;
+using TourMate.AuthService.Repositories.RequestModels;
 using TourMate.AuthService.Services.Utilities;
 
 namespace TourMate.AuthService.Api.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/v1/accounts")]
     public class AccountController : ControllerBase
     {
         private readonly IAccountService _accountService;
@@ -227,7 +227,8 @@ namespace TourMate.AuthService.Api.Controllers
                     Email = request.Email,
                     Password = HashString.ToHashString(request.Password),
                     RoleId = request.RoleId,
-                    Status = true
+                    Status = true,
+                    CreatedDate = DateTime.UtcNow
                 };
 
                 var result = await _accountService.CreateAccount(account);
@@ -333,46 +334,4 @@ namespace TourMate.AuthService.Api.Controllers
             }
         }
     }
-}
-
-// Request Models
-public class LoginRequest
-{
-    public string Email { get; set; } = string.Empty;
-    public string Password { get; set; } = string.Empty;
-}
-
-public class GoogleLoginRequest
-{
-    public string Email { get; set; } = string.Empty;
-}
-
-public class RefreshTokenRequest
-{
-    public string RefreshToken { get; set; } = string.Empty;
-}
-
-public class ChangePasswordRequest
-{
-    public int AccountId { get; set; }
-    public string CurrentPassword { get; set; } = string.Empty;
-    public string NewPassword { get; set; } = string.Empty;
-}
-
-public class RequestPasswordResetRequest
-{
-    public string Email { get; set; } = string.Empty;
-}
-
-public class ResetPasswordRequest
-{
-    public string Token { get; set; } = string.Empty;
-    public string NewPassword { get; set; } = string.Empty;
-}
-
-public class CreateAccountRequest
-{
-    public string Email { get; set; } = string.Empty;
-    public string Password { get; set; } = string.Empty;
-    public int RoleId { get; set; }
 }

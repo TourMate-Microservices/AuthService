@@ -1,14 +1,18 @@
-using TourMate.AuthService.Services.IServices;
+using Grpc.Net.Client;
+using Microsoft.Extensions.Configuration;
+using TourMate.AuthService.Api.Protos;
+using TourMate.AuthService.Services.IGrpcServices;
 using TourMate.AuthService.Services.Models;
-using UserService.Grpc;
+using static TourMate.AuthService.Api.Protos.UserService;
 
-namespace TourMate.AuthService.Api.GrpcServices
+
+namespace TourMate.AuthService.Services.GrpcServices
 {
     public class UserGrpcService : IUserGrpcService
     {
-        private readonly UserGrpc.UserGrpcClient _userGrpcClient;
+        private readonly UserServiceClient _userGrpcClient;
 
-        public UserGrpcService(UserGrpc.UserGrpcClient userGrpcClient)
+        public UserGrpcService(UserServiceClient userGrpcClient)
         {
             _userGrpcClient = userGrpcClient;
         }

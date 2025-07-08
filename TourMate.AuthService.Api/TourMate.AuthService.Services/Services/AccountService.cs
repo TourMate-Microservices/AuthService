@@ -10,7 +10,7 @@ using TourMate.AuthService.Repositories.ResponseModels;
 using TourMate.AuthService.Services.IServices;
 using TourMate.AuthService.Services.Utilities;
 using TourMate.AuthService.Services.Models;
-
+using TourMate.AuthService.Services.IGrpcServices;
 
 namespace TourMate.AuthService.Services.Services
 {

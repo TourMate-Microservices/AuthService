@@ -8,10 +8,19 @@
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
+	<ItemGroup>
+		<Protobuf Include="Protos\user.proto" GrpcServices="Client" />
+		<Protobuf Include="Protos\notification.proto" GrpcServices="Client" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="Controllers\" />
+	</ItemGroup>
+	
   <ItemGroup>
     <PackageReference Include="Google.Protobuf" Version="3.31.1" />
     <PackageReference Include="Grpc.Net.Client" Version="2.71.0" />
-    <PackageReference Include="Grpc.Net.ClientFactory" Version="2.71.0" />
+	  <PackageReference Include="Grpc.AspNetCore" Version="2.65.0" />
     <PackageReference Include="Grpc.Tools" Version="2.72.0">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
@@ -22,11 +31,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TourMate.AuthService.Services\TourMate.AuthService.Services.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-		<Protobuf Include="..\Protos\user.proto" GrpcServices="Client" />
-		<Protobuf Include="..\Protos\notification.proto" GrpcServices="Client" />
   </ItemGroup>
 
 

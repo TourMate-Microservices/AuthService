@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using TourMate.AuthService.Repositories.Models;
 using TourMate.AuthService.Services.IServices;
 
-namespace TourMate.AuthService.Services.Services
+namespace TourMate.AuthService.Services.Utilities
 {
     public class TokenService
     {

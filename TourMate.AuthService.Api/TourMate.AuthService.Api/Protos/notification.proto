@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-option csharp_namespace = "NotificationService.Grpc";
+option csharp_namespace = "TourMate.AuthService.Api.Protos";
 
-service NotificationGrpc {
+service NotificationService {
   rpc SendEmail (SendEmailRequest) returns (SendEmailReply);
 }
 

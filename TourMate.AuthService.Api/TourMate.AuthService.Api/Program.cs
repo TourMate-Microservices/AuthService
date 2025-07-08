@@ -1,13 +1,15 @@
-﻿using NotificationService.Grpc;
-using UserService.Grpc;
-using TourMate.AuthService.Services.IServices;
+﻿using TourMate.AuthService.Services.IServices;
 using TourMate.AuthService.Services.Services;
 using TourMate.AuthService.Repositories.IRepositories;
 using TourMate.AuthService.Repositories.Repositories;
 using TourMate.AuthService.Repositories.Context;
-using TourMate.AuthService.Api.GrpcServices;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
+using TourMate.AuthService.Services.Utilities;
+using TourMate.AuthService.Services.GrpcServices;
+using TourMate.AuthService.Services.IGrpcServices;
+using TourMate.AuthService.Api.Protos; // Nếu chưa dùng
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,27 +17,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<TourMateAuthContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// Config gRPC client
-builder.Services.AddGrpcClient<UserGrpc.UserGrpcClient>(o =>
+// Đăng ký gRPC client cho AuthService
+builder.Services.AddGrpcClient<NotificationService.NotificationServiceClient>(options =>
 {
-    o.Address = new Uri(builder.Configuration["GrpcServices:User"] ?? "https://localhost:7001");
-})
-.ConfigurePrimaryHttpMessageHandler(() =>
-{
-    var handler = new HttpClientHandler();
-    handler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true;
-    return handler;
+    options.Address = new Uri(builder.Configuration["GrpcServices:Notification"]);
 });
 
-builder.Services.AddGrpcClient<NotificationGrpc.NotificationGrpcClient>(o =>
+// Đăng ký gRPC client cho PublicService
+builder.Services.AddGrpcClient<UserService.UserServiceClient>(options =>
 {
-    o.Address = new Uri(builder.Configuration["GrpcServices:Notification"] ?? "https://localhost:7002");
-})
-.ConfigurePrimaryHttpMessageHandler(() =>
-{
-    var handler = new HttpClientHandler();
-    handler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true;
-    return handler;
+    options.Address = new Uri(builder.Configuration["GrpcServices:User"]);
 });
 
 // Register services

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TourMate.AuthService.Repositories.Context;
 using TourMate.AuthService.Repositories.GenericRepository;
 using TourMate.AuthService.Repositories.IRepositories;
 using TourMate.AuthService.Repositories.Models;
@@ -12,6 +13,9 @@ namespace TourMate.AuthService.Repositories.Repositories
 {
     public class RefreshTokenRepository : GenericRepository<RefreshToken>, IRefreshTokenRepository
     {
+        public RefreshTokenRepository(TourMateAuthContext context) : base(context) { }
+
+
         public async Task SaveAsync(RefreshToken token)
         {
             _context.RefreshTokens.Add(token);

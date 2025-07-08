@@ -1,14 +1,14 @@
-using TourMate.AuthService.Services.IServices;
 using TourMate.AuthService.Services.Models;
-using NotificationService.Grpc;
+using TourMate.AuthService.Api.Protos;
+using TourMate.AuthService.Services.IGrpcServices;
 
-namespace TourMate.AuthService.Api.GrpcServices
+namespace TourMate.AuthService.Services.GrpcServices
 {
     public class NotificationGrpcService : INotificationGrpcService
     {
-        private readonly NotificationGrpc.NotificationGrpcClient _notificationGrpcClient;
+        private readonly NotificationService.NotificationServiceClient _notificationGrpcClient;
 
-        public NotificationGrpcService(NotificationGrpc.NotificationGrpcClient notificationGrpcClient)
+        public NotificationGrpcService(NotificationService.NotificationServiceClient notificationGrpcClient)
         {
             _notificationGrpcClient = notificationGrpcClient;
         }
